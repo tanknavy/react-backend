@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react' //import后{}表示解构，多个对象里面的一个
 import './login.less'
 
 //登录的路由组件,样式通过类名空值

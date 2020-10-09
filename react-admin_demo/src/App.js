@@ -6,12 +6,12 @@ import Login from './pages/login/login' //login.jsx文件中的Login类/组件
 import Admin from './pages/admin/admin' //admin.jsx文件中的Admin类/继承Component的组件
 
 /*
-应用的根组件:简单的组件用函数定义,复杂的组件用类定义
+应用的根组件:简单的组件用函数定义,复杂的组件用类定义，简单复杂看状态
 */
 
 export default class App extends Component{ //自定义类继承React包中的Component类
 
-    //handleClick(){
+    //handleClick(){message.sucess("hello")}
     handleClick = () => { //自动应以组件方法最好使用箭头函数，保证this没有问题
         message.success('hello React antd UI')
     }

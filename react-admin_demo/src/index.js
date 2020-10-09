@@ -1,5 +1,5 @@
 import React from 'react' //必须引入
-import ReactDom from 'react-dom'
+import ReactDom from 'react-dom' //应用路由
 
 import App from './App' //引入自己的类，至少使用.说明路径
 
