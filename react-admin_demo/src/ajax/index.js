@@ -20,7 +20,7 @@ import ajax from './ajax'
 //写成箭头函数的形式(高阶函数),箭头函数有返回的作用， 好处，一是避免this问题，二是方便一行写完
 //注意这里箭头函数后面不要加{}，加了{}就是 function(username: any, password: any): void,返回为空，要么加上return，这样不简洁
 //不加{}表示返回这个对象
-export const reqlogin = (username, password) => ajax('/login', { username, password }, 'POST') //不要写{},写了{}就没有对象了
+export const reqLogin = (username, password) => ajax('/login', { username, password }, 'POST') //不要写{},写了{}就没有对象了
 
 //添加用户,用户信息包到一个user对象里面
 export const reqAddUser = (user) => ajax('/manage/user/add', user, 'POST') //user是对象
