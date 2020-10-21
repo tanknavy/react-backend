@@ -20,12 +20,20 @@ const Item = Form.Item // 不能写在import之前
 
 
 /*
+ReactDom.render(html代码, html元素);
+JSX(JavaScript XML)是js基于es6的扩展，运行时转换为js代码，
+jsx可以让我们在React中写html,可以在js中写html tags标签，而不需要React.createElement()或React.appendChild()方法,
+jsx转换html tags到React元素；在jxs中，HTML代码必须包裹到一个顶级的element中
+
 登陆的路由组件
 AntD的Form表单，具有数据手机，校验，提交功能，包含复选框，单选框，输入框，下拉选择框等元素
  */
 
+ //React的Component像是函数返回html元素，是独立可重用的代码，通过render函数返回HTML
+ //component有两种形式，一种class componenet(首字母必须大写)一种是function component
 class Login extends Component {
 
+  //form中提交表单的方法，发出ajax请求请求登录，使用箭头函数,如果有callback使用event
   handleSubmit = (event) => {
 
     // 阻止事件的默认行为

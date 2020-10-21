@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<!--前两个脚本用JavaScript编写React代码，第三个Babel允许在较旧的浏览器中编写JSX语法和ES6-->
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<body>
+
+    <div id="mydiv"></div>
+
+    <script type="text/babel">
+        class Hello extends React.Component {
+            //https://www.w3schools.com/react/react_events.asp
+            //--属性使用props或者state,如果有构造器,props必须传给构造器和super--
+            //https://medium.com/@aghh1504/2-increment-and-decrease-number-onclick-react-5767b765103c
+            constructor(props) {
+                super(props);
+                //state是可改变的，使用setState
+                this.state = { num: 0 };
+                //在class compoenets中，this关键之默认没有定义，所以如果使用常规函数，
+                //this表示调用这个函数的对象，可能是全局的,而箭头函数总是绑定到定义它的对象
+                //如果使用常规函数，bind()方法绑定this到这个组件实例,不绑定this返回undefined
+                //this.add = this.add.bind(this)
+                //或者在return中onClock={this.add.bind(this)}
+            }
+
+            //add(){ //常规函数
+            add = () => {
+                //箭头函数,测试发现alert显示滞后一个，因为是异步执行
+                //使用sleep也不行，要使用setTimeout来延时
+                //alert(this.state.num);
+                this.setState({ num: this.state.num + 1 });
+                console.log("num:" + this.state.num);
+                //sleep(200);
+                setTimeout(() => { alert(this.state.num); }, 100)
+                //alert(this.state.num);
+
+            }
+
+            minus = () => { //箭头函数
+                this.setState({ num: this.state.num - 1 });
+                console.log("num:" + this.state.num);
+                //sleep(200);
+                setTimeout(() => { alert(this.state.num); }, 200)
+                //alert(this.state.num);
+            }
+
+            render() {
+                return <div>
+                    <h1>Hello World!</h1>
+                    <input type="text" />
+                    <br />
+                    <label>{this.state.num}</label>
+                    <button onClick={this.add}>加一</button>
+                    <button onClick={this.minus}>减一</button>
+                </div>
+            }
+        }
+
+        ReactDOM.render(<Hello />, document.getElementById('mydiv'))
+    </script>
+
+</body>
+
+</html>
