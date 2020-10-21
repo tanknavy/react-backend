@@ -7,6 +7,7 @@ import {
   Button,
   message
 } from 'antd'
+//样式文件，less语言支持
 import './login.less'
 import logo from './images/logo.png'
 //import logo from '../../assets/images/logo.png'
@@ -20,7 +21,9 @@ const Item = Form.Item // 不能写在import之前
 
 /*
 登陆的路由组件
+AntD的Form表单，具有数据手机，校验，提交功能，包含复选框，单选框，输入框，下拉选择框等元素
  */
+
 class Login extends Component {
 
   handleSubmit = (event) => {
@@ -92,6 +95,7 @@ class Login extends Component {
     // callback('xxxx') // 验证失败, 并指定提示的文本
   }
 
+  //返回渲染
   render() {
 
     // 如果用户已经登陆, 自动跳转到管理界面
@@ -105,13 +109,17 @@ class Login extends Component {
     const { getFieldDecorator } = form;
 
     return (
+      //在login.less文件中设定格式
+      //class是html的，className是JSX attribute
+      //react动态的值使用{}
+      //react里面图片不支持src="./images/logo.pnt"语法,使用import加载，动态的值就用{}
       <div className="login">
         <header className="login-header">
           <img src={logo} alt="logo" />
-          <h1>React项目: 后台管理系统</h1>
+          <h1>React Project: Backend Admin System</h1>
         </header>
         <section className="login-content">
-          <h2>用户登陆</h2>
+          <h2>User Login</h2>
           {/* <Form onSubmit={this.handleSubmit} className="login-form"> */}
           <Form onFinish={this.handleSubmit} className="login-form">
             <Item>
@@ -154,7 +162,7 @@ class Login extends Component {
                   <Input
                     prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                     type="password"
-                    placeholder="密码"
+                    placeholder="password"
                   />
                 )
               }
@@ -162,7 +170,7 @@ class Login extends Component {
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit" className="login-form-button">
-                登陆
+                Login
               </Button>
             </Form.Item>
           </Form>

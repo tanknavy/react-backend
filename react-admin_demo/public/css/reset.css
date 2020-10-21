@@ -81,13 +81,16 @@ th:not([align]) {
 }
 
 /*上面是reset了， 现在开始定制add    */
+/*这里body是html页面的元素body,下面的root是我div里面id*/
 html, body {
      height: 100%;
      width: 100%;
  }     
     
-/*页面id*/
+/*页面div id=root的元素，class用点.,id用#*/
 #root {
   height: 100%;
   width: 100%;
 }
+
+/*padding:内边距，border:边框，margin:外边距*/
