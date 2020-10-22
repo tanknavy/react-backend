@@ -29,8 +29,8 @@ jsx转换html tags到React元素；在jxs中，HTML代码必须包裹到一个�
 AntD的Form表单，具有数据手机，校验，提交功能，包含复选框，单选框，输入框，下拉选择框等元素
  */
 
- //React的Component像是函数返回html元素，是独立可重用的代码，通过render函数返回HTML
- //component有两种形式，一种class componenet(首字母必须大写)一种是function component
+//React的Component像是函数返回html元素，是独立可重用的代码，通过render函数返回HTML
+//component有两种形式，一种class componenet(首字母必须大写)一种是function component
 class Login extends Component {
 
   //form中提交表单的方法，发出ajax请求请求登录，使用箭头函数,如果有callback使用event
@@ -46,7 +46,21 @@ class Login extends Component {
         // console.log('提交登陆的ajax请求', values)
         // 请求登陆
         const { username, password } = values
+        //reqLogin封装了axios请求返回promise对象，正常写法reqLogin().then(成功回调).catch(失败回调),
+        //reqLogin(username, password).then(response =>{}).catch(error =>{})
+        //async和await简化了promise对象的使用，不想要promise,不再使用then()指定成功/失败的回调函数
+        //以同步编码方式(没有回调函数)实现异步流程
+        //哪里写await? 返回promise表达式左侧是await:不想要promise,想要promise异步执行成功的value结果
+        //哪里写async: await所在最近定义的函数的左侧
+        // try {
+        //   const result = await reqLogin(username, password) // {status: 0, data: user}  {status: 1, msg: 'xxx'}
+        //   console.log("请求成功")
+        // } catch (error) {
+        //   console.log("请求失败")
+        // }
+        // 使用await拿异步返回的结果，原本try catch，后来在原本promise里面统一处理掉catch
         const result = await reqLogin(username, password) // {status: 0, data: user}  {status: 1, msg: 'xxx'}
+    
         // console.log('请求成功', result)
         if (result.status === 0) { // 登陆成功
           // 提示登陆成功
@@ -114,6 +128,7 @@ class Login extends Component {
 
     // 得到具强大功能的form对象
     const form = this.props.form
+    //3.x中没有使用getFieldDecorator和warrper
     const { getFieldDecorator } = form;
 
     return (
@@ -201,7 +216,7 @@ class Login extends Component {
         e. Form.create()() / getFieldDecorator()()
     3). 高阶函数更新动态, 更加具有扩展性
 
-2. 高阶组件
+2. 高阶组件(componenet)
     1). 本质就是一个函数
     2). 接收一个组件(被包装组件), 返回一个新的组件(包装组件), 包装组件会向被包装组件传入特定属性
     3). 作用: 扩展组件的功能
@@ -210,6 +225,7 @@ class Login extends Component {
 /*
 包装Form组件生成一个新的组件: Form(Login)
 新组件会向Form组件传递一个强大的对象属性: form
+3.x这样高阶组件包装,4.x中没有
  */
 const WrapLogin = Form.create()(Login)
 export default WrapLogin

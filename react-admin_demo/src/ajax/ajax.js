@@ -6,8 +6,9 @@
 import axios from 'axios'
 import { message } from 'antd'
 
+//暴露默认一个
 export default function ajax(url, data = {}, type = 'GET') { //参数就指定默认值
-    //原始处理方式，外部调用需要try catch
+    //原始处理方式，外部使用await调用需要try catch
     // if(type==='GET'){ //发GET请求
     //     return axios.get(url, { //配置对象
     //         //params: {ID: 1234} //配置参数
@@ -41,9 +42,9 @@ export default function ajax(url, data = {}, type = 'GET') { //参数就指定�
 }
 
 //请求登录接口
-ajax('/login', { username: 'Tom', password: '123' }, 'POST').then()
+//ajax('/login', { username: 'Tom', password: '123' }, 'POST').then()
 
 //添加用户接口,
-ajax('/manage/user/add', { username: 'Tom', password: '123', phone: '626-888-666', email: 'bob@gmail.com', role_id: 'customer' }, 'POST').then()
+//ajax('/manage/user/add', { username: 'Tom', password: '123', phone: '626-888-666', email: 'bob@gmail.com', role_id: 'customer' }, 'POST').then()
 
 //每个接口的路径是固定的，就是参数值不一样，考虑重新封装每个接口请求函数
