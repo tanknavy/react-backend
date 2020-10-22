@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <button onclick="person5.eat('beef')">对象中常规函数：Object</button>
+        <button onclick="person6.eat('beef')">对象中箭头函数：Window</button>
+        <button onclick="p7.eat('beef')">类中常规函数：Object</button>
+        <button onclick="p8.eat('beef')">类中箭头函数：Object</button>
+    </div>
+
+    <script>
+        let person5 = {
+            name: "bob",
+            eat: function (food) { //这里this是person5
+                console.log("this是(object Object)：" + this)
+                console.log(this.name + "在吃" + food);//this获取当前对象
+            },
+        }
+
+        let person6 = {
+            name: "carl",
+            eat: (food) => { //这里this是Window,
+                console.log("this是(object Object)：" + this)
+                console.log(this.name + "在吃" + food);//this获取当前对象
+            },
+        }
+
+        class Person7 {
+            constructor() {
+                this.name = "david";
+            }
+            eat = function (food) { //这里this是Window,
+                console.log("this是(object Object)：" + this)
+                console.log(this.name + "在吃" + food);//this获取当前对象
+            }
+        }
+        var p7 = new Person7();
+
+        class Person8 {
+            constructor() {
+                this.name = "frank";
+            }
+            eat = (food) => { //这里this是Window,
+                console.log("this是(object Object)：" + this)
+                console.log(this.name + "在吃" + food);//this获取当前对象
+            }
+        }
+        var p8 = new Person8();
+
+    </script>
+</body>
+
+</html>
