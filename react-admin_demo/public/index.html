@@ -23,7 +23,10 @@
   Learn how to configure a non-root public URL by running `npm run build`.
   -->
   <title>React App</title>
-  <link rel="stylesheet" href="./css/reset.css">
+  <!--这个css对应每个page,不能使用相对路径href="./css/reset.css
+    不能带点号，public文件夹是很特殊的，它可以直接被访问
+  -->
+  <link rel="stylesheet" href="/css/reset.css">
 
 </head>
 
