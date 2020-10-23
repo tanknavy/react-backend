@@ -7,6 +7,8 @@ import ajax from './ajax'
 
 // const BASE = 'http://localhost:5000'
 const BASE = ''
+//后台可能有api
+//const BASE = '/api'
 
 //整体暴露
 //  export default{  //对象形式

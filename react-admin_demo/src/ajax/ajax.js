@@ -8,7 +8,7 @@ import { message } from 'antd'
 
 //暴露默认一个
 export default function ajax(url, data = {}, type = 'GET') { //参数就指定默认值
-    //原始处理方式，外部使用await调用需要try catch
+    //原始处理方式，外部如果使用await时都需要try catch
     // if(type==='GET'){ //发GET请求
     //     return axios.get(url, { //配置对象
     //         //params: {ID: 1234} //配置参数
@@ -19,7 +19,7 @@ export default function ajax(url, data = {}, type = 'GET') { //参数就指定�
     // }
 
     //优化：统一处理请求异常后处理方式，外部调用方无需再try/catch
-    //解决办法：在外面包一个自己promise对象，请求出错时不reject(error),而是错误提示
+    //解决办法：在外面包一个自己promise对象(执行器)，请求出错时不reject(error),而是错误提示
     return new Promise((resolve, reject) => {
         let promise
         //1.执行异步ajax请求
@@ -33,6 +33,7 @@ export default function ajax(url, data = {}, type = 'GET') { //参数就指定�
         //2.如果成功了，调用resolve(value)
         promise.then(response => {
             resolve(response)
+            //resolve(response.data) //可直接拿到成功时的响应
             //3.如果失败了，不是调用reject(reason)而是提示异常信息，外部调用不用try/catch
         }).catch(error => {
             message.error("请求出错了： " + error.message)

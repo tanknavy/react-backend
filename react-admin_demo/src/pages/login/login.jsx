@@ -9,8 +9,8 @@ import {
 } from 'antd'
 //样式文件，less语言支持
 import './login.less'
-import logo from './images/logo.png'
-//import logo from '../../assets/images/logo.png'
+//import logo from './images/logo.png'
+import logo from '../../assets/images/logo.png'
 import { reqLogin } from '../../ajax'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
@@ -50,7 +50,7 @@ class Login extends Component {
         //reqLogin(username, password).then(response =>{}).catch(error =>{})
         //async和await简化了promise对象的使用，不想要promise,不再使用then()指定成功/失败的回调函数
         //以同步编码方式(没有回调函数)实现异步流程
-        //哪里写await? 返回promise表达式左侧是await:不想要promise,想要promise异步执行成功的value结果
+        //哪里写await? 返回promise表达式左侧写await:不想要promise,想要promise异步执行成功的value结果
         //哪里写async: await所在最近定义的函数的左侧
         // try {
         //   const result = await reqLogin(username, password) // {status: 0, data: user}  {status: 1, msg: 'xxx'}
@@ -60,7 +60,7 @@ class Login extends Component {
         // }
         // 使用await拿异步返回的结果，原本try catch，后来在原本promise里面统一处理掉catch
         const result = await reqLogin(username, password) // {status: 0, data: user}  {status: 1, msg: 'xxx'}
-    
+
         // console.log('请求成功', result)
         if (result.status === 0) { // 登陆成功
           // 提示登陆成功
@@ -68,11 +68,11 @@ class Login extends Component {
 
           // 保存user
           const user = result.data
-          memoryUtils.user = user // 保存在内存中
-          storageUtils.saveUser(user) // 保存到local中
+          memoryUtils.user = user // 保存到内存，但是用户刷新页面就会丢失
+          storageUtils.saveUser(user) // 保存到local存储中
 
-          // 跳转到管理界面 (不需要再回退回到登陆)
-          this.props.history.replace('/')
+          // 跳转到后台管理界面 (不需要再回退回到登陆)，用于事件函数中跳转，在render中跳转使用<Redirect/>
+          this.props.history.replace('/') //goback回退, push类似栈可以回退, replace替换不需要回退
 
         } else { // 登陆失败
           // 提示错误信息
@@ -120,9 +120,11 @@ class Login extends Component {
   //返回渲染
   render() {
 
-    // 如果用户已经登陆, 自动跳转到管理界面
+    // 如果用户已经登陆, 自动跳转到管理界面，
+    //在index.js中已经尝试从本地cookie中取到了用户信息,注：这没有使用加密token,
     const user = memoryUtils.user
     if (user && user._id) {
+      //render里面路由跳转使用Redirect,在事件中跳转使用this.props.history
       return <Redirect to='/' />
     }
 
