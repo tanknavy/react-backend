@@ -225,9 +225,10 @@ class Login extends Component {
     4). 高阶组件也是高阶函数: 接收一个组件函数, 返回是一个新的组件函数
  */
 /*
-包装Form组件生成一个新的组件: Form(Login)
+Form.create()是个高阶函数，接受组件Login,包装我的组件生成一个新的组件: Form(Login)
 新组件会向Form组件传递一个强大的对象属性: form
-3.x这样高阶组件包装,4.x中没有
+
+3.x这样高阶组件包装,4.x中没有这样使用
  */
 const WrapLogin = Form.create()(Login)
 export default WrapLogin
