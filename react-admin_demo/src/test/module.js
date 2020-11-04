@@ -1,5 +1,8 @@
 var a = 10;
+var b = 20;
 export {a};
+module.exports = { b }
+module.exports.bb = b
 
 //在浏览器中window是global object
 //在node中global是global object

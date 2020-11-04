@@ -157,8 +157,8 @@ class LeftNav extends Component {
         //想得到当前路由路径，高亮当前选中的菜单
         //但是当前组件不是路由组件,locations不存在，所以cannot read property 'pathname' of undefined
         //使用withRouter，它是个高阶组件,组件本质是函数，withRouter(LeftNav)
-        //高阶组件包装非路由组件，返回一个新的组件，新的组件想非路由组件传递3个属性：history/location/match
-        const path = this.props.location.pathname
+        //高阶组件包装非路由组件，返回一个新的组件，新的组件向非路由组件传递3个属性：history/location/match
+        const path = this.props.location.pathname //动态语言，外部wrapp一下传递进来属性
         console.log('render()', path)
         const openKey = this.openKey //openKey是在getMenuNodes方法中定义的，这时注意调用顺序
 

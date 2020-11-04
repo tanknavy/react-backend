@@ -7,7 +7,10 @@ import axios from 'axios'
 import { message } from 'antd'
 
 //暴露默认一个
+//两层封装,1是通用的ajax函数封装axios，2是针对url专门的接口函数
+//两个优化：统一处理了异常, 使用await同步方式获得promise异步的成功结果(response.data)
 export default function ajax(url, data = {}, type = 'GET') { //参数就指定默认值
+
     //原始处理方式，外部如果使用await时都需要try catch
     // if(type==='GET'){ //发GET请求
     //     return axios.get(url, { //配置对象
@@ -20,7 +23,8 @@ export default function ajax(url, data = {}, type = 'GET') { //参数就指定�
 
     //优化：统一处理请求异常后处理方式，外部调用方无需再try/catch
     //解决办法：在外面包一个自己promise对象(执行器)，请求出错时不reject(error),而是错误提示
-    return new Promise((resolve, reject) => {
+    //axios本来就返回promise对象，为啥还要定义promise? 统一异常处理
+    return new Promise((resolve, reject) => { //await reqLogin(username, password)
         let promise
         //1.执行异步ajax请求
         if (type === "GET") {

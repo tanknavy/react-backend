@@ -40,7 +40,7 @@ class Login extends Component {
     event.preventDefault()
 
     // 对所有表单字段进行检验
-    this.props.form.validateFields(async (err, values) => {
+    this.props.form.validateFields(async (err, values) => {//pyhon里面也有async,await
       // 检验成功
       if (!err) {
         // console.log('提交登陆的ajax请求', values)
@@ -58,7 +58,7 @@ class Login extends Component {
         // } catch (error) {
         //   console.log("请求失败")
         // }
-        // 使用await拿异步返回的结果，原本try catch，后来在原本promise里面统一处理掉catch
+        // 使用await拿Promise异步返回的结果，原本try catch，后来在原本promise里面统一处理掉catch
         const result = await reqLogin(username, password) // {status: 0, data: user}  {status: 1, msg: 'xxx'}
 
         // console.log('请求成功', result)
