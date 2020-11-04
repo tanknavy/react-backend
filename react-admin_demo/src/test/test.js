@@ -1,7 +1,8 @@
 //import {a} from "./module.js";
 // common js import
-var aa = import("./module.js")
+var aa = import("./module.js") //es6
 console.log(aa)
+
 const bb = require("./module.js") //common js
 console.log(bb.b);
 

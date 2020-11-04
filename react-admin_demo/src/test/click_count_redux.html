@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html>
 <!--前两个脚本用JavaScript编写React代码，第三个Babel允许在较旧的浏览器中编写JSX语法和ES6-->
+<!--后面3个是react和redux，还有对react props类型检查prop-types-->
 <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.1/react-redux.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.min.js"></script>
 
 <body>
     <div id="mydiv"></div>
-    
     <script type="text/babel">
         class Hello extends React.Component {
             //https://www.w3schools.com/react/react_events.asp
             //--属性使用props或者state,如果有构造器,props必须传给构造器和super--
             //https://medium.com/@aghh1504/2-increment-and-decrease-number-onclick-react-5767b765103c
             //这是个点击要保存和管理状态，redux这个js库专门做状态管理，一般和react配合使用
-            state = { num: 0, clickNum: 0 } //state可以构造器外面，也可以在里面
+            //state = { num: 0, clickNum: 0 } //state可以构造器外面，也可以在里面
+            //使用redux管理state状态，写在本html有点吃力，改为html和class分开，因为要import其它模块
+            static propTypes = { store: PropTypes.object.isRequired }//redux接受一个store对象
+
             constructor(props) {
                 super(props);
                 //state是可改变的，使用setState

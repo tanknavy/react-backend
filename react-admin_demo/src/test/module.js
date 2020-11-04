@@ -1,7 +1,7 @@
 var a = 10;
 var b = 20;
-export {a};
-module.exports = { b }
+export {a}; //es6 js
+module.exports = { b } //common js
 module.exports.bb = b
 
 //在浏览器中window是global object

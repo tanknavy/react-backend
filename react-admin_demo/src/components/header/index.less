@@ -18,9 +18,23 @@
         align-items: center;
         
         .header-bottom-left {
+            position: relative;
             width: 25%;
             text-align: center;
             font-size: 20px;
+            //需要一个倒三角形，使用伪元素，本来是className::after
+            &::after{
+                content: '';
+                position: absolute;
+                //距离右边50%，然后再向右边移动自己宽度的50%就是居中了
+                right: 50%;
+                transform: translateX(50%);
+                top: 100%
+                border-top: 20px solid red;
+                border-right: 20px solid transparent;
+                border-bottom: 20px solid transparent;
+                border-left: 20px solid transparent;
+            }
         }
 
         .header-bottom-right {
