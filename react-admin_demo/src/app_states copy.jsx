@@ -9,9 +9,7 @@ export default class ClickCount extends React.Component {
     //这是个点击要保存和管理状态，redux这个js库专门做状态管理，一般和react配合使用
     //state = { num: 0, clickNum: 0 } //state可以构造器外面，也可以在里面
     //使用redux统一管理state状态
-    //使用react-redux也就是将现在这个分解成UI组件和container组件
     static propTypes = {
-        //使用redux
         store: PropTypes.object.isRequired// props属性中必须要有store
         //使用react-redux简化redux
         // num: PropTypes.number.isRequired, //需要传入number
@@ -38,24 +36,19 @@ export default class ClickCount extends React.Component {
         const number = this.numberRef.current.value * 1 //当前选中的option的value,是string类型*1转数字
         //测试发现alert显示滞后一个数，因为是异步执行，使用setTimeOut异步延时
         //使用sleep也不行，要使用setTimeout来延时
-        //第一版: 类属性
         //this.setState({ clickNum: this.state.clickNum + 1 });//对象模式
         //this.setState({ num: this.state.num + 1 }); //对象模式
         //this.setState(state => ({ num: this.state.num + 1, clickNum: this.state.clickNum + 1 }))//函数模式，这两种写法都可以
-        //第2、3版: redux，以及使用actions的
         //使用redux后如何更新store中的数据？
         //this.props.store.dispatch({ type: 'ADD', data: number })//传递对象，和reducer中保持一致
         //参数里面的add(number)是指引入的add，而不是当前add箭头函数，千万不要this.add(number)这样就死循环了
         this.props.store.dispatch(add(number))//为了一致，使用actions和常量统一创建, 
-        //第4版: 使用react-redux
-        //this.props.add(number)//为了一致，使用actions和常量统一创建, 
         //console.log("num:" + this.state.num);
         //sleep(2000); //sleep没有定义，想要异步的使用setTimeout()，没有效果
         //setTimeout(() => { alert(this.state.num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
         //setTimeout(() => { alert(this.props.store.getState()); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
         //state是个对象时
         setTimeout(() => { alert(this.props.store.getState().num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
-        //setTimeout(() => { alert(this.props.num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
         //alert(this.state.num);
     }
 
@@ -107,17 +100,12 @@ export default class ClickCount extends React.Component {
     }
 
     render() {
-        //第1版
         //const num = this.state.num //原本在state = { num: 0, clickNum: 0 } 中取值
-        //第2/3版
         //使用redux后，数据存储在store中,注意redux更新后，不会主动更新组件状态
         //const num = this.props.store.getState() //使用redux, store不是一个对象，使用getState拿到值
         //state是对象时
-        //const num = this.props.store.getState().num//使用redux, store是对象，使用getState拿到值
-        //const clickNum = this.props.store.getState().clickNum //使用redux, store是对象，使用getState拿到值
-        //第4版,使用react-redux
-        const num = this.props.num//使用redux, store是对象，使用getState拿到值
-        const clickNum = this.props.clickNum //使用redux, store是对象，使用getState拿到值
+        const num = this.props.store.getState().num//使用redux, store是对象，使用getState拿到值
+        const clickNum = this.props.store.getState().clickNum //使用redux, store是对象，使用getState拿到值
 
         return <div>
             <h1>Hello World!</h1>

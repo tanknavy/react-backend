@@ -20,10 +20,10 @@ import { ADD, MINUS } from './action-types'//使用常量
 //     }
 // }
 
-//当state是一个对象时
+//当state是一个对象时, 多个state多个函数使用redux的combineReducers
 // export function count(state = 9, action) {
-//export default function count(state = { num: 19, clickNum: 0 }, action) { //第一次创建时会初始化状态
-export function count(state = { num: 19, clickNum: 0 }, action) { //第一次创建时会初始化状态
+export default function count(state = { num: 19, clickNum: 0 }, action) { //第一次创建时会初始化状态
+    //export function count(state = { num: 19, clickNum: 0 }, action) { //第一次创建时会初始化状态
     console.log('count()', state, action) //state是旧状态，action中包括要传入的数据
     switch (action.type) {
         case ADD:
@@ -39,7 +39,7 @@ export function count(state = { num: 19, clickNum: 0 }, action) { //第一次创
     }
 }
 
-
+//如果分开多个state,多个reducer函数，使用redux的combineReducers()
 export function count2(state2 = 99, action2) {
     console.log('count()', state2, action2) //
     switch (action2.type) {

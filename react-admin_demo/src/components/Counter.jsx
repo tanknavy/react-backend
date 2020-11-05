@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { add, minus } from './redux/actionCreators'//常量
+//import { add, minus } from './redux/actionCreators'//常量
 
-export default class ClickCount extends React.Component {
+
+//引用react-redux， 这是UI组件, 主要显示与用户交互
+//将之前的app_states中分解成UI和container两部分
+//container就是如何处理state数据和action
+
+export default class Counter extends React.Component {
     //https://www.w3schools.com/react/react_events.asp
     //--属性使用props或者state,如果有构造器,props必须传给构造器和super--
     //https://medium.com/@aghh1504/2-increment-and-decrease-number-onclick-react-5767b765103c
     //这是个点击要保存和管理状态，redux这个js库专门做状态管理，一般和react配合使用
     //state = { num: 0, clickNum: 0 } //state可以构造器外面，也可以在里面
     //使用redux统一管理state状态
-    //使用react-redux也就是将现在这个分解成UI组件和container组件
     static propTypes = {
-        //使用redux
-        store: PropTypes.object.isRequired// props属性中必须要有store
+        //store: PropTypes.object.isRequired// props属性中必须要有store
+        //第4版
         //使用react-redux简化redux
-        // num: PropTypes.number.isRequired, //需要传入number
-        // clickNum: PropTypes.number.isRequired, //需要传入number
-        // add: PropTypes.func.isRequired, //
-        // minus: PropTypes.func.isRequired
+        num: PropTypes.number.isRequired, //需要传入number
+        clickNum: PropTypes.number.isRequired, //需要传入number
+        add: PropTypes.func.isRequired, //
+        minus: PropTypes.func.isRequired,
+        addAsync: PropTypes.func.isRequired
     }
 
     constructor(props) {
@@ -46,16 +51,16 @@ export default class ClickCount extends React.Component {
         //使用redux后如何更新store中的数据？
         //this.props.store.dispatch({ type: 'ADD', data: number })//传递对象，和reducer中保持一致
         //参数里面的add(number)是指引入的add，而不是当前add箭头函数，千万不要this.add(number)这样就死循环了
-        this.props.store.dispatch(add(number))//为了一致，使用actions和常量统一创建, 
-        //第4版: 使用react-redux
-        //this.props.add(number)//为了一致，使用actions和常量统一创建, 
+        //this.props.store.dispatch(add(number))//为了一致，使用actions和常量统一创建, 
+        //第4版: 使用react-redux, 将dispatch动作放到了container
+        this.props.add(number)//为了一致，使用actions和常量统一创建, 
         //console.log("num:" + this.state.num);
         //sleep(2000); //sleep没有定义，想要异步的使用setTimeout()，没有效果
         //setTimeout(() => { alert(this.state.num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
         //setTimeout(() => { alert(this.props.store.getState()); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
         //state是个对象时
-        setTimeout(() => { alert(this.props.store.getState().num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
-        //setTimeout(() => { alert(this.props.num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
+        //setTimeout(() => { alert(this.props.store.getState().num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
+        setTimeout(() => { alert(this.props.num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
         //alert(this.state.num);
     }
 
@@ -66,12 +71,16 @@ export default class ClickCount extends React.Component {
         //this.setState(state => ({ num: this.state.num - 1, clickNum: this.state.clickNum + 1 }))//函数模式，这两种写法都可以
         //使用redux后如何更新store中的数据？
         //this.props.store.dispatch({ type: 'MINUS', data: number })//传递对象，和reducer中保持一致，
-        this.props.store.dispatch(minus(number))//为了一致，使用actions和常量统一创建
+        //this.props.store.dispatch(minus(number))//为了一致，使用actions和常量统一创建
+        //第4版: 使用react-redux
+        this.props.minus(number)//为了一致，使用actions和常量统一创建, 
         //console.log("num:" + this.state.num);
         //setTimeout(() => { alert(this.state.num); }, 200)
         //setTimeout(() => { alert(this.props.store.getState()); }, 200) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
         //state是个对象时
-        setTimeout(() => { alert(this.props.store.getState().num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
+        //setTimeout(() => { alert(this.props.store.getState().num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
+        //使用react-redux后
+        setTimeout(() => { alert(this.props.num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
         //alert(this.state.num);
 
     }
@@ -79,14 +88,18 @@ export default class ClickCount extends React.Component {
     addIfOdd = () => { //箭头函数
         const number = this.numberRef.current.value * 1 //当前选中的option的value,是string类型*1转数字
         //if (this.state.num % 2 === 1) {
-        if (this.props.store.getState() % 2 === 1) { //redux
+        //if (this.props.store.getState() % 2 === 1) { //redux
+        if (this.props.num % 2 === 1) { //react-redux
             //this.setState({ clickNum: this.state.clickNum + 1 });
             //this.setState({ num: this.state.num - 1 });
             //this.setState(state => ({ num: this.state.num + 1, clickNum: this.state.clickNum + 1 }))//函数模式，这两种写法都可以
-            this.props.store.dispatch(add(number))//为了一致，使用actions和常量统一创建, 
+            //this.props.store.dispatch(add(number))//为了一致，使用actions和常量统一创建, 
+            //第4版: 使用react-redux
+            this.props.add(number)//为了一致，使用actions和常量统一创建, 
             //console.log("num:" + this.state.num);
             //setTimeout(() => { alert(this.state.num); }, 200)
-            setTimeout(() => { alert(this.props.store.getState()); }, 200) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
+            //setTimeout(() => { alert(this.props.store.getState()); }, 200) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
+            setTimeout(() => { alert(this.props.num); }) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
             //alert(this.state.num);
         }
 
@@ -95,15 +108,23 @@ export default class ClickCount extends React.Component {
     addAsync = () => { //等一秒后再增加
         const number = this.numberRef.current.value * 1 //当前选中的option的value,是string类型*1转数字
         //console.log("num:" + this.state.num);
-        setTimeout(() => { //异步，延时一秒
-            //this.setState({ clickNum: this.state.clickNum + 1 });
-            //this.setState({ num: this.state.num + 1 });
-            //this.setState(state => ({ num: this.state.num + 1, clickNum: this.state.clickNum + 1 }))
-            this.props.store.dispatch(add(number))//为了一致，使用actions和常量统一创建, 
-            //alert(this.state.num)
-            alert(this.props.store.getState()) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
-        }, 1000)
-        //alert(this.state.num);
+
+        // setTimeout(() => { //异步，延时一秒
+        //     //this.setState({ clickNum: this.state.clickNum + 1 });
+        //     //this.setState({ num: this.state.num + 1 });
+        //     //this.setState(state => ({ num: this.state.num + 1, clickNum: this.state.clickNum + 1 }))
+        //     //this.props.store.dispatch(add(number))//为了一致，使用actions和常量统一创建, 
+        //     //第4版: 使用react-redux
+        //     this.props.add(number)//为了一致，使用actions和常量统一创建, 
+        //     //alert(this.state.num)
+        //     //alert(this.props.store.getState()) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
+        //     alert(this.props.num) //react-redux
+        // }, 1000)
+
+        //引入redux-thunk异步插件，不在这里setTimeout()
+        this.props.addAsync(number)
+        //alert(this.props.num);
+        setTimeout(() => { alert(this.props.num); }, 1200) //放入setTimeout，可指定超时,使用arrow函数处理this.state.num
     }
 
     render() {

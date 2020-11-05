@@ -7,7 +7,7 @@
 import { ADD, MINUS } from './action-types'//使用常量
 //里面参数是固定的,state不一定是对应，也可使是数据本身，action是对象哪个{type:"actionName", date: 3}
 //如果有多个状态怎么办?
-// export default function count(state = 9, action) { //第一次创建时会初始化状态
+// export default function count(state = 7, action) { //第一次创建时会初始化状态
 //     console.log('count()', state, action) //state是旧状态，action中包括要传入的数据
 //     switch (action.type) {
 //         case 'ADD':
@@ -19,8 +19,8 @@ import { ADD, MINUS } from './action-types'//使用常量
 //     }
 // }
 
-//导入常量, state是一个变量
-export default function count(state = 9, action) { //第一次创建时会初始化状态
+//导入常量, state是一个变量,也可使是一个对象(里面多个属性)，还可以使用combineReducers
+export default function count(state = 8, action) { //第一次创建时会初始化状态
     console.log('count()', state, action) //state是旧状态，action中包括要传入的数据
     switch (action.type) {
         case ADD:
@@ -32,7 +32,7 @@ export default function count(state = 9, action) { //第一次创建时会初始
     }
 }
 
-
+//如果分开多个state,多个reducer函数，使用redux的combineReducers()
 export function count2(state = 9, action) {
     console.log('count()', state, action) //
     switch (action.type) {
