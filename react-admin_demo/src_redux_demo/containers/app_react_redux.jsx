@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Counter from '../components/Counter'
-import { add, minus, addAsync} from '../redux/actionCreators'
+import { add, minus, addAsync } from '../redux/actionCreators'
 
 /**
  * 引用react-redux， 这是容器组件, 从redux拿到数据放到UI组件
@@ -41,7 +41,9 @@ function mapDispatchToProps(dispatch) { //比如 this.props.store.dispatch({ typ
 //上述最终简化版！！！
 export default connect( //连接container和redux的store
     //1.mapStateToProps, //要管理的状态,比如state = { num: 0, clickNum: 0 } 
-    state => ({ num: state.num, clickNum: state.clickNum }), //加()返回对象,不加()里面{}就不是对象而是方法体了，返回为空
+    //state => ({ num: state.num, clickNum: state.clickNum }), //加()返回对象,不加()里面{}就不是对象而是方法体了，返回为空
+    //1.2使用combineReducer多个state对象以后, state = {count, user}
+    state => ({ num: state.count.num, clickNum: state.count.clickNum }), //加()返回对象,不加()里面{}就不是对象而是方法体了，返回为空
 
     //2.mapDispatchToProps(dispatch) //action, 比如 this.props.store.dispatch({ type: 'ADD', data: number }), 
     { add, minus, addAsync } //超级简化了dispatch代码,其实还是会自动转换成上述mapDispatchToProps函数

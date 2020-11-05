@@ -1,5 +1,5 @@
 {
-  "name": "react-admin_client",
+  "name": "react-admin_server",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
