@@ -230,7 +230,7 @@ Form.create()是个高阶函数，接受组件Login,包装我的组件生成一�
 
 3.x这样高阶组件包装,4.x中没有这样使用
  */
-const WrapLogin = Form.create()(Login)
+const WrapLogin = Form.create()(Login) //react里面很多wrapper自己的class, js是动态语言，这样可以给里面的类添加新功能
 export default WrapLogin
 /*
 1. 前台表单验证

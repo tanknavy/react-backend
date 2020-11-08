@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <input type="text" />&nbsp;&nbsp;
+        <br />
+        <label id="clickNum">0</label>
+        <label id="num">0</label>
+        <br />
+        <button onClick="add()">加一</button>&nbsp;&nbsp;
+        <button onClick="minus()">减一</button>&nbsp;&nbsp;
+        <button onClick="reset()">重置num</button>&nbsp;&nbsp;
+        <button onClick="asyncAdd()">异步增加</button>&nbsp;&nbsp;
+        <br />
+
+        <script>
+            function add(){
+                let i = document.getElementById("clickNum").innerHTML.valueOf()
+                let j = document.getElementById("num").innerHTML.valueOf()
+                //console.log(i)
+                document.getElementById("clickNum").innerHTML =  Number(i) + 1
+                document.getElementById("num").innerHTML =  Number(j) + 1
+            }
+            
+            function minus(){
+                let i = document.getElementById("clickNum").innerHTML.valueOf()
+                let j = document.getElementById("num").innerHTML.valueOf()
+                //console.log(i)
+                document.getElementById("clickNum").innerHTML =  Number(i) + 1
+                document.getElementById("num").innerHTML =  Number(j) - 1
+            }
+
+            function reset(){
+                //let i = document.getElementById("clickNum").innerHTML.valueOf()
+                let j = document.getElementById("num").innerHTML.valueOf()
+                //console.log(i)
+                //document.getElementById("clickNum").innerHTML =  Number(i) + 1
+                document.getElementById("num").innerHTML =  0
+            }
+
+            function asyncAdd(){
+                let i = document.getElementById("clickNum").innerHTML.valueOf()
+                let j = document.getElementById("num").innerHTML.valueOf()
+                //console.log(i)
+                setTimeout(()=>{
+                     document.getElementById("clickNum").innerHTML =  Number(i) + 1
+                    document.getElementById("num").innerHTML =  Number(j) + 1
+                },1000
+                )
+            }
+        </script>
+
+    </body>
+</html>

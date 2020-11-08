@@ -15,7 +15,7 @@ const SubMenu = Menu.SubMenu
  */
 //export default class LeftNav extends Component {
 class LeftNav extends Component {
-
+    
     //想根据menuList数组动态生成一个菜单/子菜单列表
     //map + 递归对每个子菜单,递归引用this.getMenuNodes
     getMenuNodes_map = (menuList) => {

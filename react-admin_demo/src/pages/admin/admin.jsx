@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import memoryUtils from '../../utils/memoryUtils'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd';
-import LeftNav from '../../components/left-nav';
-import Header from '../../components/header';
+import LeftNav from '../../components/left-nav'; //网页框架
+import Header from '../../components/header';//网页框架
 
-import Home from '../home/home'
+import Home from '../home/home' //单页app的每个route
 import Category from '../category/category'
 import Product from '../product/product'
 import User from '../user/user'
